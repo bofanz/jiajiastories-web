@@ -52,11 +52,8 @@ export default function Story({ loaderData }: Route.ComponentProps) {
   return (
     // Spans columns 3–6 of the parent grid. Keyed by story so switching stories
     // mounts fresh images (placeholders show) instead of swapping sources in place.
-    <article
-      key={story._id}
-      className="col-span-4 grid grid-cols-subgrid"
-    >
-      <section aria-label="Photos" className="col-span-2">
+    <article key={story._id} className="col-span-4 grid grid-cols-subgrid">
+      <section aria-label="Photos" className="col-span-2 py-3">
         {story.photos.length > 0 && (
           <ul className="flex flex-col">
             {story.photos.map((photo, i) => {
@@ -88,7 +85,7 @@ export default function Story({ loaderData }: Route.ComponentProps) {
         )}
       </section>
 
-      <section aria-label="About" className="col-start-4">
+      <section aria-label="About" className="col-start-4 py-3">
         {/* Not shown on screen; kept for search engines and screen readers. */}
         <header className="sr-only">
           <h1>{story.name}</h1>
@@ -97,9 +94,7 @@ export default function Story({ loaderData }: Route.ComponentProps) {
         </header>
 
         {story.description && (
-          <p className="px-1 whitespace-pre-line">
-            {story.description}
-          </p>
+          <p className="px-1 whitespace-pre-line">{story.description}</p>
         )}
       </section>
     </article>
