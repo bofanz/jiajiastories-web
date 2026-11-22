@@ -11,15 +11,13 @@ import type { Route } from "./+types/root";
 import "./app.css";
 
 export const links: Route.LinksFunction = () => [
-  { rel: "preconnect", href: "https://fonts.googleapis.com" },
+  // The regular weight is used for all body text: fetch it before CSS asks.
   {
-    rel: "preconnect",
-    href: "https://fonts.gstatic.com",
+    rel: "preload",
+    href: "/fonts/ABCOtto-Regular-Trial.otf",
+    as: "font",
+    type: "font/otf",
     crossOrigin: "anonymous",
-  },
-  {
-    rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
   },
 ];
 
@@ -62,7 +60,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   }
 
   return (
-    <main className="pt-16 pr-4 pb-4">
+    <main className="p-3">
       <h1>{message}</h1>
       <p>{details}</p>
       {stack && (

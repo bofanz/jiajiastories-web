@@ -1,0 +1,9 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "jiajiastories-web",
+  "main": "./workers/app.ts",
+  "compatibility_date": "2026-11-19",
+  "observability": {
+    "enabled": true
+  }
+}

@@ -6,6 +6,7 @@
   src: url("/fonts/ABCOtto-Regular-Trial.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -13,6 +14,7 @@
   src: url("/fonts/ABCOtto-Medium-Trial.otf") format("opentype");
   font-weight: 500;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -20,6 +22,7 @@
   src: url("/fonts/ABCOtto-RegularItalic-Trial.otf") format("opentype");
   font-weight: normal;
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
@@ -27,6 +30,7 @@
   src: url("/fonts/ABCOtto-Bold-Trial.otf") format("opentype");
   font-weight: 700;
   font-style: normal;
+  font-display: swap;
 }
 
 @theme {

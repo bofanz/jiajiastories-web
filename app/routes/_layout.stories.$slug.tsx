@@ -1,4 +1,4 @@
-import { data } from "react-router";
+import { data, isRouteErrorResponse } from "react-router";
 import type { Route } from "./+types/_layout.stories.$slug";
 import { formatDateRange } from "~/lib/date";
 import { SITE_TITLE } from "~/lib/site";
@@ -103,5 +103,18 @@ export default function Story({ loaderData }: Route.ComponentProps) {
         )}
       </section>
     </article>
+  );
+}
+
+/**
+ * Rendered inside the stories layout, so the list stays on screen and the
+ * visitor can pick another story.
+ */
+export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
+  const notFound = isRouteErrorResponse(error) && error.status === 404;
+  return (
+    <section className="col-span-4 px-1">
+      <h1>{notFound ? "Story not found" : "Something went wrong"}</h1>
+    </section>
   );
 }
