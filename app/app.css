@@ -1,15 +1,96 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@font-face {
+  font-family: "ABC Otto";
+  src: url("/fonts/ABCOtto-Regular-Trial.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "ABC Otto";
+  src: url("/fonts/ABCOtto-Medium-Trial.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "ABC Otto";
+  src: url("/fonts/ABCOtto-RegularItalic-Trial.otf") format("opentype");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "ABC Otto";
+  src: url("/fonts/ABCOtto-Bold-Trial.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+}
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-abc-otto: "ABC Otto", serif;
+}
+
+@layer base {
+  * {
+    @apply font-abc-otto;
+    font-feature-settings: "lnum" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  * {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    /* cursor: default; */
+  }
+  *::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 html,
 body {
-  @apply bg-white dark:bg-gray-950;
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 1.25rem; /* 20px */
+  background-color: #e7e7e7;
 
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
+  }
+}
+
+/* Story list: reset every inherited/UA property, then define only what we need. */
+@layer components {
+  .story-list,
+  .story-list > li {
+    all: unset;
+  }
+
+  .story-list {
+    display: block;
+  }
+
+  .story-list > li {
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .story-list > li > a {
+    display: block;
+  }
+}
+
+@layer components {
+  .story-date {
+    font-family: "ABC Otto", var(--font-sans);
+    font-weight: normal;
+    font-style: normal;
   }
 }
