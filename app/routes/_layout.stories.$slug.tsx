@@ -61,23 +61,30 @@ export default function Story({ loaderData }: Route.ComponentProps) {
               const isFirst = i === 0;
               return (
                 <li key={photo._id}>
-                  <img
-                    src={photo.image.src}
-                    srcSet={photo.image.srcSet}
-                    sizes={PHOTO_SIZES}
-                    width={photo.image.width}
-                    height={photo.image.height}
-                    alt={photo.description ?? ""}
-                    loading={isFirst ? "eager" : "lazy"}
-                    fetchPriority={isFirst ? "high" : "auto"}
-                    decoding="async"
-                    className="block h-auto w-full bg-cover bg-center"
-                    style={
-                      photo.image.lqip
-                        ? { backgroundImage: `url(${photo.image.lqip})` }
-                        : undefined
-                    }
-                  />
+                  <figure className="relative">
+                    <img
+                      src={photo.image.src}
+                      srcSet={photo.image.srcSet}
+                      sizes={PHOTO_SIZES}
+                      width={photo.image.width}
+                      height={photo.image.height}
+                      alt={photo.description ?? ""}
+                      loading={isFirst ? "eager" : "lazy"}
+                      fetchPriority={isFirst ? "high" : "auto"}
+                      decoding="async"
+                      className="block h-auto w-full bg-cover bg-center"
+                      style={
+                        photo.image.lqip
+                          ? { backgroundImage: `url(${photo.image.lqip})` }
+                          : undefined
+                      }
+                    />
+                    {photo.description && (
+                      <figcaption className="absolute inset-x-0 bottom-0 p-3 whitespace-pre-line text-[#ff008f]">
+                        {photo.description}
+                      </figcaption>
+                    )}
+                  </figure>
                 </li>
               );
             })}

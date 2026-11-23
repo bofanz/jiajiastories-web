@@ -40,6 +40,19 @@ export function shouldRevalidate({
   return formMethod ? defaultShouldRevalidate : false;
 }
 
+type StoryListItem = Route.ComponentProps["loaderData"]["stories"][number];
+
+/** One line of the list: name, city, date — highlighted and bracketed when open. */
+function StoryLine({ story, isCurrent }: { story: StoryListItem; isCurrent: boolean }) {
+  return (
+    <span className={isCurrent ? "text-[#ff008f]" : undefined}>
+      {isCurrent && "("}
+      {`${story.name}, ${story.city}, ${formatDateRange(story.fromDate, story.toDate)}`}
+      {isCurrent && ")"}
+    </span>
+  );
+}
+
 export default function Stories({ loaderData, params }: Route.ComponentProps) {
   // The slug of the open story, from the URL; undefined on the list page.
   const currentSlug = "slug" in params ? params.slug : undefined;
@@ -49,19 +62,11 @@ export default function Stories({ loaderData, params }: Route.ComponentProps) {
     // The page itself scrolls with the story; the list sticks to the viewport
     // and scrolls on its own if it's taller than the screen.
     <div className="grid grid-cols-6 items-start gap-3 px-3">
-      <ul className="story-list sticky top-0 py-3 col-span-2 max-h-[calc(100dvh-1.5rem)] overflow-y-auto">
+      <ul className="story-list sticky top-0 col-span-2 max-h-[calc(100dvh-1.5rem)] overflow-y-auto py-3">
         {loaderData.stories.map((story) => (
           <li key={story._id}>
             <NavLink to={`/stories/${story.slug}`}>
-              <span
-                className={
-                  story.slug === currentSlug ? "text-[#ff008f]" : undefined
-                }
-              >
-                {story.slug === currentSlug && "("}
-                {`${story.name}, ${story.city}, ${formatDateRange(story.fromDate, story.toDate)}`}
-                {story.slug === currentSlug && ")"}
-              </span>
+              <StoryLine story={story} isCurrent={story.slug === currentSlug} />
             </NavLink>
           </li>
         ))}

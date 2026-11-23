@@ -75,6 +75,8 @@ body {
 
   .story-list {
     display: block;
+    /* Lets list lines measure themselves against the column width (cqw). */
+    container-type: inline-size;
   }
 
   .story-list > li {
@@ -88,6 +90,28 @@ body {
 
   .story-list > li > a {
     display: block;
+  }
+
+  /*
+   * Lines wider than the column slide slowly to reveal their end while hovered
+   * (or focused by keyboard), and slide back when the pointer leaves. The
+   * offset is (column width - line width), capped at 0, so lines that fit
+   * never move.
+   */
+  .story-list > li > a > span {
+    display: inline-block;
+    transition: translate 3s ease-in-out;
+  }
+
+  .story-list > li:hover > a > span,
+  .story-list > li > a:focus-visible > span {
+    translate: min(0px, 100cqw - 100%);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .story-list > li > a > span {
+      transition: none;
+    }
   }
 }
 
